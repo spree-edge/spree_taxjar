@@ -7,7 +7,7 @@ describe Spree::Order do
 
   describe 'Constants' do
     it 'should include Taxable' do
-      expect(Spree::Order.include?(Taxable)).to eq true
+      expect(Spree::Order.include?(SpreeTaxjar::Taxable)).to eq true
     end
   end
 
