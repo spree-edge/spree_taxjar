@@ -55,6 +55,8 @@ module Spree
     end
 
     def has_nexus?
+      return false if tax_address.blank?
+
       nexus_regions = @client.nexus_regions
       SpreeTaxjar::Logger.log(__method__, {
         order: {id: @order.id, number: @order.number},
@@ -86,19 +88,19 @@ module Spree
       end
 
       def tax_address_country_iso
-        tax_address.country.iso
+        tax_address.country&.iso
       end
 
       def tax_address_state_abbr
-        tax_address.state.abbr
+        tax_address.state&.abbr
       end
 
       def tax_address_city
-        tax_address.city
+        tax_address&.city
       end
 
       def tax_address_zip
-        tax_address.zipcode
+        tax_address&.zipcode
       end
 
       def tax_address
