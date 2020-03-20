@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Taxable do
+describe SpreeTaxjar::Taxable do
   let(:order) { create(:order) }
   let(:tax_category) { create(:tax_category) }
   let(:country) { create(:country) }

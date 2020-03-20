@@ -11,15 +11,31 @@ Spree::Taxjar is a sales tax extension for Spree using [SmartCalcs by TaxJar](ht
 - Go to `Account >> State Settings` and click the [Add State with Nexus](http://blog.taxjar.com/sales-tax-nexus-definition/) button for each state where want/need to collect sales tax.
     - **NOTE:** TaxJar returns ZERO sales tax by default for orders shipping to states which are not designated as a nexus state.
 
+Demo
+-----------------------------------
+Try Spree Taxjar for Spree Master with direct deployment on Heroku:
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-taxjar-master)
+
+Try Spree Taxjar for Spree 3-4 with direct deployment on Heroku:
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-taxjar)
+
+Try Spree Taxjar for Spree 3-1 with direct deployment on Heroku:
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-taxjar-3-1)
+
+ *NOTE**: Don't forget to create a taxjar account and update the key in your admin section && Update tax rates to Spree/Taxjar calculator.
+
 ## Installation
 
 1. Add this extension to your Gemfile with this line:
 
   ```ruby
-  gem 'spree_taxjar', github: 'vinsol-spree-contrib/spree_taxjar', branch: <spree-version-compatible>
+  gem 'spree_taxjar', github: 'vinsol-spree-contrib/spree_taxjar'
   ```
-  
-  *The `branch` option is important:* it must match the version of Spree you're using. For example, use `3-1-stable` if you're using Spree `3-1-stable` or any `3.1.x` version.
+
+  **Note** For spree 3-1 use `3-1-stable` branch. For spree version > 3-1 use `master` branch.
 
 2. Install the gem using Bundler:
 
@@ -42,6 +58,7 @@ Spree::Taxjar is a sales tax extension for Spree using [SmartCalcs by TaxJar](ht
   - Check the `TAXJAR ENABLED` checkbox
   - Optionally, check `TAXJAR DEBUG ENABLED` for debugging issues
     - Not recommended for production use unless debugging production issues
+  - Update tax rates to Spree/Taxjar calculator.
 
 ## Developing / Debugging Extension
 
@@ -74,6 +91,11 @@ First bundle your dependencies, then run `rake`. `rake` will default to building
 bundle
 bundle exec rake
 ```
+
+## See It In Action
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=xh__bVxTw3Q
+" target="_blank"><img src="http://img.youtube.com/vi/xh__bVxTw3Q/0.jpg" 
+alt="Youtube Video Tutorial" /></a>
 
 ## Credits
 

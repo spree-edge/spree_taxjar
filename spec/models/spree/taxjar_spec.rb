@@ -8,11 +8,11 @@ describe Spree::Taxjar do
   let!(:zone) { create(:zone, name: "Country Zone", default_tax: true, zone_members: []) }
   let!(:ship_address) { create(:ship_address, city: "Adrian", zipcode: "79001", state: state) }
   let!(:tax_category) { create(:tax_category, tax_rates: []) }
-  let!(:order) { create(:order,ship_address_id: ship_address.id) }
+  let!(:order) { create(:order, ship_address: ship_address) }
   let!(:line_item) { create(:line_item, price: 10, quantity: 3, order_id: order.id) }
   let!(:state_al) { create(:state, country: country, abbr: "AL") }
   let!(:ship_address_al) { create(:ship_address, city: "Adrian", zipcode: "79001", state: state_al) }
-  let!(:order_al) { create(:order,ship_address_id: ship_address_al.id) }
+  let!(:order_al) { create(:order,ship_address: ship_address_al) }
   let!(:line_item_al) { create(:line_item, price: 10, quantity: 3, order_id: order_al.id) }
   let!(:shipment_al) { create(:shipment, cost: 10, order: order_al) }
   let!(:taxjar_api_key) { Spree::Config[:taxjar_api_key] = '04d828b7374896d7867b03289ea20957' }

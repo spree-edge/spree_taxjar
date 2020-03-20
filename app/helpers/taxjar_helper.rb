@@ -13,19 +13,14 @@ module TaxjarHelper
   class TaxjarLog
     attr_reader :logger
 
-    def initialize(path_name, file_name, log_info = nil, schedule = "weekly")
-      @logger ||= Logger.new("#{Rails.root}/log/#{path_name}.log", schedule)
+    def initialize(logdev)
+      @logger ||= Logger.new(logdev)
       @logger.formatter = Pretty.new
-      progname(file_name.split("/").last.chomp(".rb"))
-      info(log_info) unless log_info.nil?
+      @logger.progname = 'spree_taxjar extension'
     end
 
     def logger_enabled?
       Spree::Config[:taxjar_debug_enabled]
-    end
-
-    def progname(progname = nil)
-      progname.nil? ? logger.progname : logger.progname = progname
     end
 
     def info(log_info = nil)

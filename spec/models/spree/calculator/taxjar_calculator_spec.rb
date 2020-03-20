@@ -14,7 +14,7 @@ describe Spree::Calculator::TaxjarCalculator do
   let!(:rate) { create(:tax_rate, tax_category: tax_category, amount: 0.05, included_in_price: included_in_price) }
   let(:included_in_price) { false }
   let!(:calculator) { Spree::Calculator::TaxjarCalculator.new(calculable: rate) }
-  let!(:order) { create(:order,ship_address_id: ship_address.id) }
+  let!(:order) { create(:order,ship_address: ship_address) }
   let!(:line_item) { create(:line_item, price: 10, quantity: 3, order_id: order.id) }
   let!(:line_item_exempt) { create(:line_item, price: 10, quantity: 3, order_id: order.id) }
   let!(:shipment) { create(:shipment, cost: 10, order: order) }
