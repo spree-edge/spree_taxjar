@@ -17,6 +17,10 @@ module SpreeTaxjar
       Dir.glob(File.join(File.dirname(__FILE__), '../../app/**/*_decorator*.rb')) do |c|
         Rails.configuration.cache_classes ? require(c) : load(c)
       end
+
+      Dir.glob(File.join(File.dirname(__FILE__), '../../lib/taxjar/**/*_decorator*.rb')) do |c|
+        Rails.application.config.cache_classes ? require(c) : load(c)
+      end
     end
 
     initializer 'spree.register.calculators' do |app|
