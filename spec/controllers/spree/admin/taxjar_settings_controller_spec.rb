@@ -21,7 +21,7 @@ describe Spree::Admin::TaxjarSettingsController, type: :controller do
     end
 
     it "assigns @preferences_api" do
-      expect(assigns[:preferences_api]).to eq([:taxjar_api_key, :taxjar_enabled, :taxjar_debug_enabled])
+      expect(assigns[:preferences_api]).to eq([:taxjar_api_key, :taxjar_enabled, :taxjar_debug_enabled, :taxjar_sandbox_environment_enabled])
     end
 
     it "renders edit template" do
