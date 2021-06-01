@@ -9,11 +9,17 @@ describe SpreeTaxjar::Taxable do
   describe '#taxjar_applicable?' do
     context 'when TaxRate matches tax_zone' do
       before do
-        @zone = create(:zone, :name => "Country Zone", :default_tax => false, :zone_members => [])
-        @zone.zone_members.create(:zoneable => country)
+        Spree::Config[:tax_using_ship_address] = false
+        @zone = create(
+          :zone,
+          name: "Country Zone",
+          default_tax: false,
+          zone_members: [],
+          states: [order.bill_address.country.states.first]
+        )
+        @zone.zone_members.create(:zoneable => order.bill_address.country)
         @rate = Spree::TaxRate.create(amount: 1, zone: @zone,
                   tax_category: tax_category, calculator: calculator)
-        allow(order).to receive_messages :tax_zone => @zone
       end
 
       it 'should return true' do
