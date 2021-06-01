@@ -1,28 +1,31 @@
 <%= render 'spree/admin/shared/sub_menu/configuration' %>
-
 <% content_for :page_title do %>
   <%= Spree.t(:taxjar_settings) %>
 <% end %>
-
 <%= form_tag admin_taxjar_settings_path, method: :put do %>
   <div id="preferences" data-hook>
     <div class="row">
       <div class="col-md-6">
         <fieldset class="no-border-bottom">
           <% @preferences_api.each do |key| %>
-              <div class="form-group">
+            <div class="form-group">
+              <% if Spree::Config.preference_type(key) == :boolean %>
+                <div class="checkbox">
+                  <%= label_tag key do %>
+                    <%= hidden_field_tag(key, 0, id: "#{key}_hidden") %>
+                    <%= check_box_tag(key, 1, Spree::Config[key]) %>
+                    <%= Spree.t(key) %>
+                  <%end%>
+                </div>
+              <% else %>
                 <%= label_tag key %>
                 <%= preference_field_tag(key, Spree::Config[key], type: Spree::Config.preference_type(key)) %>
-              </div>
+              <% end %>
+            </div>
           <% end %>
         </fieldset>
       </div>
     </div>
-
-    <div class="form-buttons" data-hook="buttons">
-      <%= button Spree.t('actions.update'), 'refresh' %>
-      <span class="or"><%= Spree.t(:or) %></span>
-      <%= button_link_to Spree.t('actions.cancel'), admin_orders_url, icon: 'delete' %>
-    </div>
+    <%= render partial: 'spree/admin/shared/edit_resource_links', locals: {collection_url: admin_orders_url}  %>
   </div>
 <% end %>
