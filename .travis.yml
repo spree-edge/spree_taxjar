@@ -15,6 +15,7 @@ services:
 language: ruby
 
 rvm:
+  - 2.5
   - 2.7
   - 3.0
 
@@ -42,6 +43,18 @@ jobs:
       gemfile: gemfiles/spree_3_4.gemfile
     - rvm: 3.0
       gemfile: gemfiles/spree_3_7.gemfile
+    - rvm: 2.7
+      gemfile: gemfiles/spree_3_2.gemfile
+    - rvm: 2.7
+      gemfile: gemfiles/spree_3_3.gemfile
+    - rvm: 2.7
+      gemfile: gemfiles/spree_3_4.gemfile
+    - rvm: 2.5
+      gemfile: gemfiles/spree_3_7.gemfile
+    - rvm: 2.5
+      gemfile: gemfiles/spree_4.gemfile
+    - rvm: 2.5
+      gemfile: gemfiles/spree_master.gemfile
 
 before_install:
   - mysql -u root -e "GRANT ALL ON *.* TO 'travis'@'%';"
