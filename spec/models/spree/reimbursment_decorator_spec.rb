@@ -21,7 +21,7 @@ describe Spree::Reimbursement do
       context 'when taxjar_applicable? return true' do
         context 'when taxjar calculation disabled' do
           before :each do
-            Spree::Config[:taxjar_enabled] = false
+            SpreeTaxjar::Config[:taxjar_enabled] = false
           end
 
           it 'tax should be zero' do
@@ -33,7 +33,7 @@ describe Spree::Reimbursement do
 
         context 'when taxjar calculation enabled' do
           before do
-            Spree::Config[:taxjar_enabled] = true
+            SpreeTaxjar::Config[:taxjar_enabled] = true
             @order = reimbursement.order
             allow(reimbursement).to receive(:taxjar_applicable?).with(@order).and_return(true)
             allow(Spree::Taxjar).to receive(:new).with(@order, reimbursement).and_return(client)

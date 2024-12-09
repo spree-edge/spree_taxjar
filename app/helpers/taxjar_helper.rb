@@ -20,7 +20,7 @@ module TaxjarHelper
     end
 
     def logger_enabled?
-      Spree::Config[:taxjar_debug_enabled]
+      SpreeTaxjar::Config[:taxjar_debug_enabled]
     end
 
     def info(log_info = nil)

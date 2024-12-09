@@ -15,7 +15,7 @@ describe Spree::Order do
     describe '#delete_taxjar_transaction' do
       context 'when taxjar calculation disabled' do
         before :each do
-          Spree::Config[:taxjar_enabled] = false
+          SpreeTaxjar::Config[:taxjar_enabled] = false
         end
 
         it 'tax should be zero' do
@@ -27,7 +27,7 @@ describe Spree::Order do
 
       context 'when taxjar calculation enabled' do
         before :each do
-          Spree::Config[:taxjar_enabled] = true
+          SpreeTaxjar::Config[:taxjar_enabled] = true
         end
 
         context 'when taxjar_applicable? returns false' do
@@ -55,7 +55,7 @@ describe Spree::Order do
     describe '#capture_taxjar' do
       context 'when taxjar calculation disabled' do
         before :each do
-          Spree::Config[:taxjar_enabled] = false
+          SpreeTaxjar::Config[:taxjar_enabled] = false
         end
 
         it 'tax should be zero' do
@@ -67,7 +67,7 @@ describe Spree::Order do
 
       context 'when taxjar calculation enabled' do
         before :each do
-          Spree::Config[:taxjar_enabled] = true
+          SpreeTaxjar::Config[:taxjar_enabled] = true
         end
 
         context 'when taxjar_applicable? returns false' do
