@@ -15,7 +15,7 @@ describe Spree::Taxjar do
   let!(:order_al) { create(:order,ship_address: ship_address_al) }
   let!(:line_item_al) { create(:line_item, price: 10, quantity: 3, order_id: order_al.id) }
   let!(:shipment_al) { create(:shipment, cost: 10, order: order_al) }
-  let!(:taxjar_api_key) { Spree::Config[:taxjar_api_key] = '04d828b7374896d7867b03289ea20957' }
+  let!(:taxjar_api_key) { SpreeTaxjar::Config[:taxjar_api_key] = '04d828b7374896d7867b03289ea20957' }
   let(:client) { double(Taxjar::Client) }
 
   let(:spree_taxjar) { Spree::Taxjar.new(order) }
@@ -54,8 +54,8 @@ describe Spree::Taxjar do
 
   context 'When reimbursement is not present' do
     before :each do
-      Spree::Config[:taxjar_api_key] = '04d828b7374896d7867b03289ea20957'
-      allow(::Taxjar::Client).to receive(:new).with(api_key: Spree::Config[:taxjar_api_key], api_url: ::Taxjar::API::Request::DEFAULT_API_URL).and_return(client)
+      SpreeTaxjar::Config[:taxjar_api_key] = '04d828b7374896d7867b03289ea20957'
+      allow(::Taxjar::Client).to receive(:new).with(api_key: SpreeTaxjar::Config[:taxjar_api_key], api_url: ::Taxjar::API::Request::DEFAULT_API_URL).and_return(client)
     end
 
     let(:spree_taxjar) { Spree::Taxjar.new(order) }
@@ -88,7 +88,7 @@ describe Spree::Taxjar do
 
       context 'when has_nexus? returns true' do
         before do
-          allow(::Taxjar::Client).to receive(:new).with(api_key: Spree::Config[:taxjar_api_key], api_url: ::Taxjar::API::Request::DEFAULT_API_URL).and_return(client)
+          allow(::Taxjar::Client).to receive(:new).with(api_key: SpreeTaxjar::Config[:taxjar_api_key], api_url: ::Taxjar::API::Request::DEFAULT_API_URL).and_return(client)
           allow(spree_taxjar).to receive(:has_nexus?).and_return(true)
           allow(client).to receive(:create_order).and_return(true)
         end
@@ -160,7 +160,7 @@ describe Spree::Taxjar do
   context 'When reimbursement is present' do
     let(:spree_taxjar) { Spree::Taxjar.new(order, reimbursement) }
     before do
-      allow(::Taxjar::Client).to receive(:new).with(api_key: Spree::Config[:taxjar_api_key], api_url: ::Taxjar::API::Request::DEFAULT_API_URL).and_return(client)
+      allow(::Taxjar::Client).to receive(:new).with(api_key: SpreeTaxjar::Config[:taxjar_api_key], api_url: ::Taxjar::API::Request::DEFAULT_API_URL).and_return(client)
     end
 
     describe '#create_refund_transaction_for_order' do

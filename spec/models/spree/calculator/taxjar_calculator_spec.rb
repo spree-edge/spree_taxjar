@@ -25,9 +25,9 @@ describe Spree::Calculator::TaxjarCalculator do
   let(:taxjar_response) { double(Taxjar::Tax) }
 
   before do
-    Spree::Config[:taxjar_api_key] = '04d828b7374896d7867b03289ea20957'
+    SpreeTaxjar::Config[:taxjar_api_key] = '04d828b7374896d7867b03289ea20957'
     ## Forcing tests with shipping_address as tax_address
-    Spree::Config[:tax_using_ship_address] = true
+    SpreeTaxjar::Config[:tax_using_ship_address] = true
   end
 
   describe 'Constants' do
@@ -49,7 +49,7 @@ describe Spree::Calculator::TaxjarCalculator do
   describe '#compute_line_item' do
     context 'when taxjar calculation disabled' do
       before :each do
-        Spree::Config[:taxjar_enabled] = false
+        SpreeTaxjar::Config[:taxjar_enabled] = false
       end
 
       it 'tax should be zero' do
@@ -59,7 +59,7 @@ describe Spree::Calculator::TaxjarCalculator do
 
     context 'when taxjar calculation enabled' do
       before :each do
-        Spree::Config[:taxjar_enabled] = true
+        SpreeTaxjar::Config[:taxjar_enabled] = true
         tax_category_exempt.update_column(:tax_code, taxjar_exempt_tax_code)
         line_item_exempt.update_column(:tax_category_id, tax_category_exempt.id)
       end
@@ -93,7 +93,7 @@ describe Spree::Calculator::TaxjarCalculator do
   describe '#compute_shipment' do
     context 'when taxjar calculation disabled' do
       before :each do
-        Spree::Config[:taxjar_enabled] = false
+        SpreeTaxjar::Config[:taxjar_enabled] = false
       end
 
       it 'tax should be zero' do
@@ -103,7 +103,7 @@ describe Spree::Calculator::TaxjarCalculator do
 
     context 'when taxjar calculation enabled' do
       before :each do
-        Spree::Config[:taxjar_enabled] = true
+        SpreeTaxjar::Config[:taxjar_enabled] = true
       end
 
       context 'Nexus charges tax on shipping' do
@@ -134,7 +134,7 @@ describe Spree::Calculator::TaxjarCalculator do
     context 'when rate included in price' do
       context 'when taxjar calculation disabled' do
         before :each do
-          Spree::Config[:taxjar_enabled] = false
+          SpreeTaxjar::Config[:taxjar_enabled] = false
         end
 
         it 'tax should be zero' do
@@ -145,7 +145,7 @@ describe Spree::Calculator::TaxjarCalculator do
         before do
           rate.included_in_price = true
           rate.save!
-          Spree::Config[:taxjar_enabled] = true
+          SpreeTaxjar::Config[:taxjar_enabled] = true
         end
         it 'will raise RuntimeError' do
           expect{ calculator.compute_shipping_rate(line_item)}.to raise_error(RuntimeError)

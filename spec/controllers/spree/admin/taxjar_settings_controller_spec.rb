@@ -41,15 +41,15 @@ describe Spree::Admin::TaxjarSettingsController, type: :controller do
     end
 
     it "saves taxjar_api_key with passed parameter" do
-      expect(Spree::Config[:taxjar_api_key]).to eq 'SAMPLE_API_KEY'
+      expect(SpreeTaxjar::Config[:taxjar_api_key]).to eq 'SAMPLE_API_KEY'
     end
 
     it "saves taxjar_enabled with passed parameter" do
-      expect(Spree::Config[:taxjar_enabled]).to be(true)
+      expect(SpreeTaxjar::Config[:taxjar_enabled]).to be(true)
     end
 
     it "saves taxjar_debug_enabled with passed parameter" do
-      expect(Spree::Config[:taxjar_debug_enabled]).to be(true)
+      expect(SpreeTaxjar::Config[:taxjar_debug_enabled]).to be(true)
     end
 
     it "sets flash message to success" do

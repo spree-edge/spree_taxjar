@@ -44,14 +44,14 @@ Spree::Taxjar is a sales tax extension for Spree using [SmartCalcs by TaxJar](ht
 
 ## Developing / Debugging Extension
 
-- Ensure `Spree::Config[:taxjar_enabled]` is set as expected (true/false)
-- Set `Spree::Config[:taxjar_debug_enabled]` as true
+- Ensure `SpreeTaxjar::Config[:taxjar_enabled]` is set as expected (true/false)
+- Set `SpreeTaxjar::Config[:taxjar_debug_enabled]` as true
     - It starts logging the interactions in `spec/dummy/log/spree_taxjar.log` if using tests
     - Check the logs in your Rails application AT `log/spree_taxjar.log` where you have installed the spree_taxjar extension
     - The same logs are also added to Rails log file like `log/development.log` (works for all environments)
 - As most of the API interactions are recorded and stored in VCR cassettes AT `spec/fixtures/vcr_cassettes`
     - Start with getting familiar with request and response expected
-    - Feel free to delete the cassettes to debug your live use-case by setting `Spree::Config[:taxjar_api_key]` as your api_key and inspect results
+    - Feel free to delete the cassettes to debug your live use-case by setting `SpreeTaxjar::Config[:taxjar_api_key]` as your api_key and inspect results
 
 ## TaxJar API Usage and Billing
 

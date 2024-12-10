@@ -5,7 +5,7 @@ module Taxjar
         @http_timeout = {}
 
         %i[connect write read].each do |method|
-          @http_timeout[method] = @options[:timeout] || ::Spree::Config[:taxjar_timeout]
+          @http_timeout[method] = @options[:timeout] || ::SpreeTaxjar::Config[:taxjar_timeout]
         end
       end
     end

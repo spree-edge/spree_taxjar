@@ -1,4 +1,3 @@
-<%= render 'spree/admin/shared/sub_menu/configuration' %>
 <% content_for :page_title do %>
   <%= Spree.t(:taxjar_settings) %>
 <% end %>
@@ -9,17 +8,17 @@
         <fieldset class="no-border-bottom">
           <% @preferences_api.each do |key| %>
             <div class="form-group">
-              <% if Spree::Config.preference_type(key) == :boolean %>
+              <% if SpreeTaxjar::Config.preference_type(key) == :boolean %>
                 <div class="checkbox">
                   <%= label_tag key do %>
                     <%= hidden_field_tag(key, 0, id: "#{key}_hidden") %>
-                    <%= check_box_tag(key, 1, Spree::Config[key]) %>
+                    <%= check_box_tag(key, 1, SpreeTaxjar::Config[key]) %>
                     <%= Spree.t(key) %>
                   <%end%>
                 </div>
               <% else %>
                 <%= label_tag key %>
-                <%= preference_field_tag(key, Spree::Config[key], type: Spree::Config.preference_type(key)) %>
+                <%= preference_field_tag(key, SpreeTaxjar::Config[key], type: SpreeTaxjar::Config.preference_type(key)) %>
               <% end %>
             </div>
           <% end %>
